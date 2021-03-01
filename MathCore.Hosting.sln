@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathCore.Hosting", "MathCore.Hosting\MathCore.Hosting.csproj", "{C798853D-64B1-4B61-A0CE-38BFCACC23AB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F0E1DA6-3BC3-4C08-AE9F-72C44D92BEBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWPF", "Tests\TestWPF\TestWPF.csproj", "{2FC48AD5-6D83-4EED-AD1F-0BC5A86C313A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{C798853D-64B1-4B61-A0CE-38BFCACC23AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C798853D-64B1-4B61-A0CE-38BFCACC23AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C798853D-64B1-4B61-A0CE-38BFCACC23AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FC48AD5-6D83-4EED-AD1F-0BC5A86C313A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FC48AD5-6D83-4EED-AD1F-0BC5A86C313A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FC48AD5-6D83-4EED-AD1F-0BC5A86C313A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC48AD5-6D83-4EED-AD1F-0BC5A86C313A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2FC48AD5-6D83-4EED-AD1F-0BC5A86C313A} = {0F0E1DA6-3BC3-4C08-AE9F-72C44D92BEBA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2929697-B66A-44A5-883B-DD1368E6A92C}

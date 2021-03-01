@@ -7,6 +7,7 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 
 namespace MathCore.Hosting
 {
@@ -129,7 +130,7 @@ namespace MathCore.Hosting
             return services;
         }
 
-        public static IServiceCollection AddServicesFromConfiguration(IServiceCollection services, IConfiguration config, Assembly assembly)
+        public static IServiceCollection AddServicesFromConfiguration(this IServiceCollection services, IConfiguration config, Assembly assembly)
         {
             static Type? GetType(string TypeName, Assembly asm) => asm.GetType(TypeName)
                 ?? asm.DefinedTypes.FirstOrDefault(t => t.Name == TypeName);
@@ -154,5 +155,13 @@ namespace MathCore.Hosting
 
             return services;
         }
+
+        public static IHostBuilder AddServiceLocator(this IHostBuilder Host) => Host.ConfigureServices(ServiceLocator.ConfigureServices);
+
+        public static IHostBuilder AddServices(this IHostBuilder Host, Assembly assembly) =>
+            Host.ConfigureServices(services => services.AddServicesFromAssembly(assembly));
+
+        public static IHostBuilder AddServices(this IHostBuilder Host, Type type) =>
+            Host.ConfigureServices(services => services.AddServicesFromAssembly(type));
     }
 }

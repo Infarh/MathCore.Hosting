@@ -1,0 +1,42 @@
+﻿using System;
+using System.Windows;
+
+using MathCore.Hosting;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+namespace TestWPF
+{
+    public partial class App
+    {
+        private static IHost __Hosting;
+
+        public static IHost Hosting => __Hosting ??= CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+
+        public static IHostBuilder CreateHostBuilder(string[] args) => Host
+           .CreateDefaultBuilder(args)
+           .AddServices(typeof(App))
+           .ConfigureServices(ConfigureServices)
+           .AddServiceLocator();
+
+        private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
+        {
+
+        }
+
+        protected override async void OnStartup(StartupEventArgs e)
+        {
+            var host = Hosting;
+            base.OnStartup(e);
+            await host.StartAsync().ConfigureAwait(false);
+        }
+
+        protected override async void OnExit(ExitEventArgs e)
+        {
+            using var host = Hosting;
+            base.OnExit(e);
+            await host.StopAsync().ConfigureAwait(false);
+        }
+    }
+}
