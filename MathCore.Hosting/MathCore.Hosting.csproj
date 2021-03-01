@@ -6,6 +6,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Version>0.0.1</Version>
+    <PackageReleaseNotes>Альфа-версия</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>shmachilin@gmail.com</Authors>
+    <Description>Инструменты автоматизированной конфигурации хоста WPF-приложения</Description>
+    <Copyright>shmachilin@gmail.com</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Infarh/MathCore.Hosting</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Infarh/MathCore.Hosting.git</RepositoryUrl>
+    <PackageTags>WPF, DI, IoC, Services</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="DynamicPropertyManager.cs" />
   </ItemGroup>
