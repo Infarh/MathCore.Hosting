@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathCore.Hosting", "MathCore.Hosting\MathCore.Hosting.csproj", "{C798853D-64B1-4B61-A0CE-38BFCACC23AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathCore.Hosting", "MathCore.Hosting\MathCore.Hosting.csproj", "{C798853D-64B1-4B61-A0CE-38BFCACC23AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F0E1DA6-3BC3-4C08-AE9F-72C44D92BEBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWPF", "Tests\TestWPF\TestWPF.csproj", "{2FC48AD5-6D83-4EED-AD1F-0BC5A86C313A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWPF", "Tests\TestWPF\TestWPF.csproj", "{2FC48AD5-6D83-4EED-AD1F-0BC5A86C313A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Common", ".Common", "{870FFA8A-5793-40CF-AF67-199F6CC51250}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

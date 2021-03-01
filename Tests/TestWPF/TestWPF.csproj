@@ -14,4 +14,10 @@
     <ProjectReference Include="..\..\MathCore.Hosting\MathCore.Hosting.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

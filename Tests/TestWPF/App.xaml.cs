@@ -22,7 +22,7 @@ namespace TestWPF
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-
+            services.AddServicesFromConfiguration(host.Configuration.GetSection("Services"), typeof(App));
         }
 
         protected override async void OnStartup(StartupEventArgs e)

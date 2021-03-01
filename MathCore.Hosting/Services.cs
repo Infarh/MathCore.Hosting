@@ -130,6 +130,9 @@ namespace MathCore.Hosting
             return services;
         }
 
+        public static IServiceCollection AddServicesFromConfiguration(this IServiceCollection services, IConfiguration config, Type type)
+            => services.AddServicesFromConfiguration(config, type.Assembly);
+
         public static IServiceCollection AddServicesFromConfiguration(this IServiceCollection services, IConfiguration config, Assembly assembly)
         {
             static Type? GetType(string TypeName, Assembly asm) => asm.GetType(TypeName)
