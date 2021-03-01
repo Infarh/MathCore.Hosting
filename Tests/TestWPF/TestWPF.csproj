@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathCore.WPF" Version="0.0.9" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\MathCore.Hosting\MathCore.Hosting.csproj" />
   </ItemGroup>
 

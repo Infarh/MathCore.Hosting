@@ -1,9 +1,9 @@
 ﻿using MathCore.Hosting;
-using MathCore.ViewModels;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using TestWPF.Services.Interfaces;
+using TestWPF.ViewModels.Base;
 
 namespace TestWPF.ViewModels
 {
