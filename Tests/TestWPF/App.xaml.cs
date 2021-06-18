@@ -6,6 +6,8 @@ using MathCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using TestWPF.ViewModels;
+
 namespace TestWPF
 {
     public partial class App
@@ -13,6 +15,8 @@ namespace TestWPF
         private static IHost __Hosting;
 
         public static IHost Hosting => __Hosting ??= CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+
+        public static IServiceProvider Services => Hosting.Services;
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host
            .CreateDefaultBuilder(args)
@@ -28,6 +32,9 @@ namespace TestWPF
         protected override async void OnStartup(StartupEventArgs e)
         {
             var host = Hosting;
+
+            var main_model = Services.GetService<MainWindowViewModel>();
+
             base.OnStartup(e);
             await host.StartAsync().ConfigureAwait(false);
         }

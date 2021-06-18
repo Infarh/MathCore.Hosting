@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -87,9 +88,9 @@ namespace MathCore.Hosting
                 : instance;
 
             var factory_expr = Expression.Lambda<Func<IServiceProvider, object>>(body, sp);
-            var factory = factory_expr.Compile();
+            var factory = factory_expr.Compile(DebugInfoGenerator.CreatePdbGenerator());
 
-            return new ServiceDescriptor(Service, factory, Mode);
+            return new ServiceDescriptor(Service, factory!, Mode);
         }
 
         public static IServiceCollection AddService(this IServiceCollection services, Type Service, Type? Implementation, ServiceLifetime Mode)
@@ -111,7 +112,7 @@ namespace MathCore.Hosting
         private static IServiceCollection AddSimple(this IServiceCollection services, Type Service, Type? Implementation, ServiceLifetime Mode)
         {
             var descriptor = Implementation is null
-                ? new ServiceDescriptor(Service, Mode)
+                ? new ServiceDescriptor(Service, Service, Mode)
                 : new ServiceDescriptor(Service, Implementation, Mode);
 
             services.TryAdd(descriptor);

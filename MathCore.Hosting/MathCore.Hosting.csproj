@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.0.1</Version>
-    <PackageReleaseNotes>Альфа-версия</PackageReleaseNotes>
+    <Version>0.0.1.1</Version>
+    <PackageReleaseNotes>
+      Исправление ошибки
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup>

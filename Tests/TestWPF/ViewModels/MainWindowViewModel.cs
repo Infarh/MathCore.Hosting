@@ -20,12 +20,12 @@ namespace TestWPF.ViewModels
 
         #endregion
 
-        [Inject]
-        public IUserDialog UI { get; set; }
+        //[Inject]
+        //public IUserDialog UI { get; set; }
         
-        [Inject]
-        private void Initialize(IUserDialog UI) => this.UI = UI;
+        //[Inject]
+        //private void Initialize(IUserDialog UI) => this.UI = UI;
 
-        public MainWindowViewModel(IUserDialog UI) => this.UI = UI;
+        //public MainWindowViewModel(IUserDialog UI) => this.UI = UI;
     }
 }
