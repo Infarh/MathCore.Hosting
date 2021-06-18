@@ -1,0 +1,24 @@
+name: Testing
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      
+      - name: Setup .NET 5.0.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+          
+      - name: Building
+        run: |
+          dotnet build MathCore.Hosting --nologo -c Debug
+          dotnet build Tests/MathCore.Hosting.Tests --nologo -c Debug
+          
+      - name: Run Tests
+        run: dotnet test Tests/MathCore.Hosting.Tests --no-build -c Debug
