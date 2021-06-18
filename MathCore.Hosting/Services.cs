@@ -3,10 +3,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 
 namespace MathCore.Hosting
 {
@@ -34,10 +36,13 @@ namespace MathCore.Hosting
                .First();
 
             var sp = Expression.Parameter(typeof(IServiceProvider), "sp");
-            var get_service = sp.Type.GetMethod("GetService") ?? throw new InvalidOperationException();
+            //var get_service = sp.Type.GetMethod("GetService") ?? throw new InvalidOperationException();
+            var get_service = typeof(ServiceProviderServiceExtensions)
+               .GetMethod("GetRequiredService", new[] { typeof(IServiceProvider), typeof(Type) })
+                ?? throw new InvalidOperationException();
 
             var ctor_parameters = ctor.GetParameters()
-               .Select(p => Expression.Convert(Expression.Call(sp, get_service, Expression.Constant(p.ParameterType)), p.ParameterType));
+               .Select(p => Expression.Convert(Expression.Call(get_service, sp, Expression.Constant(p.ParameterType)), p.ParameterType));
 
             var properties = service_type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty)
                .Concat(service_type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.SetProperty))
@@ -45,7 +50,7 @@ namespace MathCore.Hosting
                .Select(p =>
                {
                    var type = Expression.Constant(p.PropertyType);
-                   var obj = Expression.Call(sp, get_service, type);
+                   var obj = Expression.Call(get_service, sp, type);
                    var value = Expression.Convert(obj, p.PropertyType);
                    return (MemberBinding)Expression.Bind(p, value);
                })
@@ -67,7 +72,7 @@ namespace MathCore.Hosting
                       .Select(p =>
                        {
                            var type = Expression.Constant(p.ParameterType);
-                           var obj = Expression.Call(sp, get_service, type);
+                           var obj = Expression.Call(get_service, sp, type);
                            return Expression.Convert(obj, p.ParameterType);
                        });
                    return (Expression)Expression.Call(result, InitMethod, parameters);
@@ -83,9 +88,9 @@ namespace MathCore.Hosting
                 : instance;
 
             var factory_expr = Expression.Lambda<Func<IServiceProvider, object>>(body, sp);
-            var factory = factory_expr.Compile();
+            var factory = factory_expr.Compile(DebugInfoGenerator.CreatePdbGenerator());
 
-            return new ServiceDescriptor(Service, factory, Mode);
+            return new ServiceDescriptor(Service, factory!, Mode);
         }
 
         public static IServiceCollection AddService(this IServiceCollection services, Type Service, Type? Implementation, ServiceLifetime Mode)
@@ -107,7 +112,7 @@ namespace MathCore.Hosting
         private static IServiceCollection AddSimple(this IServiceCollection services, Type Service, Type? Implementation, ServiceLifetime Mode)
         {
             var descriptor = Implementation is null
-                ? new ServiceDescriptor(Service, Mode)
+                ? new ServiceDescriptor(Service, Service, Mode)
                 : new ServiceDescriptor(Service, Implementation, Mode);
 
             services.TryAdd(descriptor);
@@ -129,7 +134,10 @@ namespace MathCore.Hosting
             return services;
         }
 
-        public static IServiceCollection AddServicesFromConfiguration(IServiceCollection services, IConfiguration config, Assembly assembly)
+        public static IServiceCollection AddServicesFromConfiguration(this IServiceCollection services, IConfiguration config, Type type)
+            => services.AddServicesFromConfiguration(config, type.Assembly);
+
+        public static IServiceCollection AddServicesFromConfiguration(this IServiceCollection services, IConfiguration config, Assembly assembly)
         {
             static Type? GetType(string TypeName, Assembly asm) => asm.GetType(TypeName)
                 ?? asm.DefinedTypes.FirstOrDefault(t => t.Name == TypeName);
@@ -146,6 +154,7 @@ namespace MathCore.Hosting
                     ?? throw new InvalidOperationException($"Тип реализации сервиса {implementation_type_name} не найден")
                     : null;
 
+                // ReSharper disable once SettingNotFoundInConfiguration
                 if (!Enum.TryParse<ServiceLifetime>(service_config["Mode"], out var mode))
                     mode = ServiceLifetime.Transient;
 
@@ -154,5 +163,13 @@ namespace MathCore.Hosting
 
             return services;
         }
+
+        public static IHostBuilder AddServiceLocator(this IHostBuilder Host) => Host.ConfigureServices(ServiceLocator.ConfigureServices);
+
+        public static IHostBuilder AddServices(this IHostBuilder Host, Assembly assembly) =>
+            Host.ConfigureServices(services => services.AddServicesFromAssembly(assembly));
+
+        public static IHostBuilder AddServices(this IHostBuilder Host, Type type) =>
+            Host.ConfigureServices(services => services.AddServicesFromAssembly(type));
     }
 }
