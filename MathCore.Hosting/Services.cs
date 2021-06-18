@@ -35,10 +35,13 @@ namespace MathCore.Hosting
                .First();
 
             var sp = Expression.Parameter(typeof(IServiceProvider), "sp");
-            var get_service = sp.Type.GetMethod("GetService") ?? throw new InvalidOperationException();
+            //var get_service = sp.Type.GetMethod("GetService") ?? throw new InvalidOperationException();
+            var get_service = typeof(ServiceProviderServiceExtensions)
+               .GetMethod("GetRequiredService", new[] { typeof(IServiceProvider), typeof(Type) })
+                ?? throw new InvalidOperationException();
 
             var ctor_parameters = ctor.GetParameters()
-               .Select(p => Expression.Convert(Expression.Call(sp, get_service, Expression.Constant(p.ParameterType)), p.ParameterType));
+               .Select(p => Expression.Convert(Expression.Call(get_service, sp, Expression.Constant(p.ParameterType)), p.ParameterType));
 
             var properties = service_type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty)
                .Concat(service_type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.SetProperty))
@@ -46,7 +49,7 @@ namespace MathCore.Hosting
                .Select(p =>
                {
                    var type = Expression.Constant(p.PropertyType);
-                   var obj = Expression.Call(sp, get_service, type);
+                   var obj = Expression.Call(get_service, sp, type);
                    var value = Expression.Convert(obj, p.PropertyType);
                    return (MemberBinding)Expression.Bind(p, value);
                })
@@ -68,7 +71,7 @@ namespace MathCore.Hosting
                       .Select(p =>
                        {
                            var type = Expression.Constant(p.ParameterType);
-                           var obj = Expression.Call(sp, get_service, type);
+                           var obj = Expression.Call(get_service, sp, type);
                            return Expression.Convert(obj, p.ParameterType);
                        });
                    return (Expression)Expression.Call(result, InitMethod, parameters);
@@ -150,6 +153,7 @@ namespace MathCore.Hosting
                     ?? throw new InvalidOperationException($"Тип реализации сервиса {implementation_type_name} не найден")
                     : null;
 
+                // ReSharper disable once SettingNotFoundInConfiguration
                 if (!Enum.TryParse<ServiceLifetime>(service_config["Mode"], out var mode))
                     mode = ServiceLifetime.Transient;
 
