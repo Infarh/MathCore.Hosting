@@ -88,7 +88,7 @@ namespace MathCore.Hosting
                 : instance;
 
             var factory_expr = Expression.Lambda<Func<IServiceProvider, object>>(body, sp);
-            var factory = factory_expr.Compile(DebugInfoGenerator.CreatePdbGenerator());
+            var factory = factory_expr.Compile();
 
             return new ServiceDescriptor(Service, factory!, Mode);
         }
