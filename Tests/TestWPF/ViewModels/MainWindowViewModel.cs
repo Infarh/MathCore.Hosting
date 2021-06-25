@@ -1,28 +1,20 @@
 ﻿using MathCore.Hosting;
+using MathCore.WPF.ViewModels;
 
 using Microsoft.Extensions.DependencyInjection;
 
 using TestWPF.Services.Interfaces;
-using TestWPF.ViewModels.Base;
 
 namespace TestWPF.ViewModels
 {
     [Service(ServiceLifetime.Singleton)]
-    internal class MainWindowViewModel : ViewModel
+    internal class MainWindowViewModel : TitledViewModel
     {
-        #region Title : string - Заголовок
+        public MainWindowViewModel() => Title = "Заголовок главного окна";
 
-        /// <summary>Заголовок</summary>
-        private string _Title = "Заголовок главного окна";
+        [Inject]
+        public IUserDialog UI { get; set; }
 
-        /// <summary>Заголовок</summary>
-        public string Title { get => _Title; set => Set(ref _Title, value); }
-
-        #endregion
-
-        //[Inject]
-        //public IUserDialog UI { get; set; }
-        
         //[Inject]
         //private void Initialize(IUserDialog UI) => this.UI = UI;
 

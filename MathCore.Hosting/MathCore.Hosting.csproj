@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.0.1.2</Version>
+    <Version>0.0.2</Version>
     <PackageReleaseNotes>
-      Исправление ошибки
+      Упращённый метод загрузки сервисов из файла конфигурации
     </PackageReleaseNotes>
   </PropertyGroup>
 
