@@ -21,8 +21,9 @@ namespace TestWPF
         public static IHostBuilder CreateHostBuilder(string[] args) => Host
            .CreateDefaultBuilder(args)
            .AddServices(typeof(App))
-           .ConfigureServices(ConfigureServices)
-           .AddServiceLocator();
+        //.ConfigureServices(ConfigureServices)
+        //.AddServiceLocator()
+        ;
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
@@ -33,6 +34,7 @@ namespace TestWPF
         {
             var host = Hosting;
 
+            var env = Services.GetRequiredService<IHostEnvironment>();
             var main_model = Services.GetService<MainWindowViewModel>();
 
             base.OnStartup(e);
