@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
@@ -194,5 +195,45 @@ namespace MathCore.Hosting
 
         public static IHostBuilder AddServices(this IHostBuilder Host, Type type) =>
             Host.ConfigureServices(services => services.AddServicesFromAssembly(type));
+
+        public static IHostBuilder AddServices(this IHostBuilder Host, params Assembly[] Assemblies)
+        {
+            foreach (var assembly in Assemblies)
+                Host.AddServices(assembly);
+            return Host;
+        }
+
+        public static IHostBuilder AddServices(this IHostBuilder Host, IEnumerable<Assembly> Assemblies)
+        {
+            foreach (var assembly in Assemblies)
+                Host.AddServices(assembly);
+            return Host;
+        }
+
+        public static IHostBuilder AddServices(this IHostBuilder Host, params Type[] Types)
+        {
+            foreach (var assembly in Types)
+                Host.AddServices(assembly);
+            return Host;
+        }
+
+        public static IHostBuilder AddServices(this IHostBuilder Host, IEnumerable<Type> Types)
+        {
+            foreach (var assembly in Types)
+                Host.AddServices(assembly);
+            return Host;
+        }
+
+        public static IHostBuilder AddServicesFromAssembly(this IHostBuilder Host, string AssemblyName)
+        {
+            var assembly = Assembly.Load(AssemblyName);
+            return Host.AddServices(assembly);
+        }
+
+        public static IHostBuilder AddServicesFromAssemblyPath(this IHostBuilder Host, string AssemblyPath)
+        {
+            var assembly = Assembly.LoadFrom(AssemblyPath);
+            return Host.AddServices(assembly);
+        }
     }
 }
