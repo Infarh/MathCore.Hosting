@@ -10,7 +10,7 @@
   <PropertyGroup>
     <Version>0.0.4</Version>
     <PackageReleaseNotes>
-      Функционаьлность регистрации сервисов выделена в отдельный пакет MathCore.DI
+      Функциональность регистрации сервисов выделена в отдельный пакет MathCore.DI
     </PackageReleaseNotes>
   </PropertyGroup>
 
