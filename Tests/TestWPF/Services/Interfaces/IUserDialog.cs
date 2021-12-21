@@ -1,4 +1,5 @@
-﻿using MathCore.Hosting;
+﻿using MathCore.DI;
+using MathCore.Hosting;
 
 namespace TestWPF.Services.Interfaces
 {
