@@ -21,7 +21,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Infarh/MathCore.Hosting</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Infarh/MathCore.Hosting.git</RepositoryUrl>
-    <PackageTags>WPF, DI, IoC, Services</PackageTags>
+    <PackageTags>WPF;DI;IoC;Services</PackageTags>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <PackageReference Include="MathCore.DI" Version="0.0.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
 
