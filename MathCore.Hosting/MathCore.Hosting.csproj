@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <PackageReference Include="MathCore.DI" Version="0.0.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
 
