@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.0.4.1</Version>
+    <Version>0.0.4.2</Version>
     <PackageReleaseNotes>
       Функциональность регистрации сервисов выделена в отдельный пакет MathCore.DI
     </PackageReleaseNotes>
@@ -30,13 +30,13 @@
     <AssemblyOriginatorKeyFile>MathCore.Hosting.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>MathCore.Hosting.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DocumentationFile>$(MSBuildProjectName.Replace(" ", "_")).xml</DocumentationFile>
     <NoWarn>1701;1702; 1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathCore.DI" Version="0.0.1.1" />
+    <PackageReference Include="MathCore.DI" Version="0.0.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
