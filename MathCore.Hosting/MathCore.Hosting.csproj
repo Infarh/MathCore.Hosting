@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.0.4.3</Version>
+    <Version>0.0.4.4</Version>
     <PackageReleaseNotes>
       Функциональность регистрации сервисов выделена в отдельный пакет MathCore.DI
     </PackageReleaseNotes>
@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <PackageReference Include="MathCore.DI" Version="0.0.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
 
