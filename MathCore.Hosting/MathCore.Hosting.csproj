@@ -1,14 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>
+      net8.0;
+      net9.0;
+      net10.0;
+      netstandard2.0
+    </TargetFrameworks>
     <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.0.5.1</Version>
+    <Version>0.0.6</Version>
     <PackageReleaseNotes>
       Функциональность регистрации сервисов выделена в отдельный пакет MathCore.DI
     </PackageReleaseNotes>
@@ -36,8 +41,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathCore.DI" Version="0.0.3.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+    <PackageReference Include="MathCore.DI" Version="0.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
 

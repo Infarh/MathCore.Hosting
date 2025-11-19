@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31019.35
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathCore.Hosting", "MathCore.Hosting\MathCore.Hosting.csproj", "{C798853D-64B1-4B61-A0CE-38BFCACC23AB}"
 EndProject
@@ -11,7 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWPF", "Tests\TestWPF\Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Common", ".Common", "{870FFA8A-5793-40CF-AF67-199F6CC51250}"
 	ProjectSection(SolutionItems) = preProject
+		.github\copilot-instructions.md = .github\copilot-instructions.md
+		.github\workflows\publish.yml = .github\workflows\publish.yml
 		ReadMe.md = ReadMe.md
+		.github\workflows\testing.yml = .github\workflows\testing.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathCore.Hosting.Tests", "Tests\MathCore.Hosting.Tests\MathCore.Hosting.Tests.csproj", "{8890CFAF-9629-4686-B8C5-B41C693D295F}"
